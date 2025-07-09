@@ -1,5 +1,6 @@
 use dep::keccak256;
 use dep::array_helpers;
+use dep::std;
 
 pub struct PubKey {
     pub_x: [u8; 32],
@@ -53,7 +54,7 @@ impl PubKey {
 
     pub fn to_eth_address(self) -> Field {
         let pub_key = array_helpers::u8_32_to_u8_64(self.pub_x, self.pub_y);
-        let hashed_pub_key = keccak256::keccak256(pub_key, 64);
+        let hashed_pub_key = keccak256::keccak256();
 
         let mut addr: Field = 0;
         for i in 0..20 {
